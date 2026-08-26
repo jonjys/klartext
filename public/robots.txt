@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /brand.html
+Disallow: /brand/
 
-Sitemap: https://klartext-chi.vercel.app/sitemap.xml
+Sitemap: https://skrivklart.se/sitemap.xml

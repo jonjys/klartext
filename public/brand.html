@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Skrivklart — klistra in</title>
+  <style>
+    :root { --cream:#f3efe6; --paper:#fffdf8; --ink:#1c1b18; --pine:#3d4f44; --line:#ddd6c8; --muted:#5c5a54; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:16px/1.45 system-ui,sans-serif; background:var(--cream); color:var(--ink); }
+    main { max-width: 40rem; margin: 0 auto; padding: 1.25rem 1rem 4rem; }
+    h1 { font-family: Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.8rem; margin: 0 0 .4rem; }
+    h2 { font-size: 1.05rem; margin: 2rem 0 .6rem; letter-spacing: .04em; text-transform: uppercase; color: var(--pine); }
+    p, li { color: var(--ink); }
+    .muted { color: var(--muted); font-size: .92rem; }
+    .card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; margin: .7rem 0; }
+    img { width: 100%; height: auto; border-radius: 10px; display: block; background: var(--cream); }
+    .avatar { width: 160px; height: 160px; border-radius: 50%; }
+    pre { white-space: pre-wrap; word-break: break-word; font: 14px/1.4 ui-monospace, monospace; margin: 0; }
+    button.copy { margin-top: .6rem; background: var(--pine); color: var(--cream); border: 0; border-radius: 10px; padding: .7rem 1rem; font-weight: 600; min-height: 44px; }
+    a { color: var(--pine); }
+    .ok { color: var(--pine); font-weight: 600; }
+    .warn { color: #8a3b12; font-weight: 600; }
+  </style>
+</head>
+<body>
+<main>
+  <p class="muted">Privat sida · långtryck på bilderna för att spara</p>
+  <h1>Skrivklart — klistra in</h1>
+  <p class="muted">Öppna Threads / X i en annan flik. Kopiera fält för fält. Länka till den URL som funkar just nu.</p>
+
+  <h2>1. Bilder</h2>
+  <div class="card">
+    <p>Profilbild (Threads + X)</p>
+    <img class="avatar" src="/brand/avatar.jpg" alt="Skrivklart avatar" />
+    <p class="muted" style="margin-top:.6rem">Högerklicka / långtryck → Spara bild. Fil: avatar.jpg</p>
+  </div>
+  <div class="card">
+    <p>X-banner 1500×500</p>
+    <img src="/brand/banner.jpg" alt="Skrivklart banner" />
+  </div>
+
+  <h2>2. Threads @skrivklaratai</h2>
+  <div class="card">
+    <p><strong>Namn</strong></p>
+    <pre id="t-name">Skrivklart</pre>
+    <button class="copy" data-copy="t-name">Kopiera namn</button>
+  </div>
+  <div class="card">
+    <p><strong>Biografi</strong> (150 tecken)</p>
+    <pre id="t-bio">Vi skriver det du fryser på.
+Personligt brev, överklagande, samboavtal.
+79–199 kr. Inget konto.</pre>
+    <button class="copy" data-copy="t-bio">Kopiera bio</button>
+  </div>
+  <div class="card">
+    <p><strong>Länk</strong></p>
+    <pre id="t-link">https://klartext-chi.vercel.app</pre>
+    <button class="copy" data-copy="t-link">Kopiera länk</button>
+    <p class="muted">Byt till https://skrivklart.se när Vercel visar Valid Configuration.</p>
+  </div>
+  <div class="card">
+    <p><strong>Intressen</strong> — ta bort «juridik». Vi ger inte juridisk rådgivning.</p>
+    <pre id="t-int">Företagande, jobb, hyra, konsument, småföretagare, skrivande</pre>
+    <button class="copy" data-copy="t-int">Kopiera intressen</button>
+  </div>
+
+  <h2>3. X — gör om @spawnizz</h2>
+  <div class="card">
+    <p>Byt i denna ordning: bild → banner → namn → bio → webb → användarnamn.</p>
+    <p><strong>Namn</strong></p>
+    <pre id="x-name">Skrivklart</pre>
+    <button class="copy" data-copy="x-name">Kopiera namn</button>
+  </div>
+  <div class="card">
+    <p><strong>Användarnamn</strong> — @skrivklart såg ledigt ut. Annars @skrivklaratai</p>
+    <pre id="x-user">skrivklart</pre>
+    <button class="copy" data-copy="x-user">Kopiera handle</button>
+  </div>
+  <div class="card">
+    <p><strong>Bio</strong></p>
+    <pre id="x-bio">Vi skriver det du fryser på.
+Svenska dokument: brev, överklagande, samboavtal.
+79–199 kr. Inget konto. Utkast gratis.</pre>
+    <button class="copy" data-copy="x-bio">Kopiera bio</button>
+  </div>
+  <div class="card">
+    <p><strong>Webbplats + plats</strong></p>
+    <pre id="x-web">https://klartext-chi.vercel.app
+Sverige</pre>
+    <button class="copy" data-copy="x-web">Kopiera</button>
+  </div>
+
+  <h2>4. Första inläggen — klistra in i den här ordningen</h2>
+  <div class="card">
+    <p><strong>1 · Starta</strong></p>
+    <pre id="p1">Jag hatar blanka dokument.
+
+Så jag byggde Skrivklart.
+
+Du fyller i fakta. Vi skriver personligt brev, överklagande, samboavtal, reklamation.
+
+Utkastet är gratis. Hela texten 79–199 kr. Inget konto.
+
+Inte juridisk rådgivning — ett utkast du kan skicka.
+
+https://klartext-chi.vercel.app</pre>
+    <button class="copy" data-copy="p1">Kopiera inlägg 1</button>
+  </div>
+  <div class="card">
+    <p><strong>2 · Brev</strong></p>
+    <pre id="p2">«Berätta om en utmaning du övervunnit.»
+
+Det är meningen att det ska låta äkta. Det låter som alla andras mall.
+
+Skrivklart skriver personligt brev från dina fakta, inte från floskler.
+
+89 kr. Utkast gratis.
+
+https://klartext-chi.vercel.app/dokument/personligt-brev</pre>
+    <button class="copy" data-copy="p2">Kopiera inlägg 2</button>
+  </div>
+  <div class="card">
+    <p><strong>3 · Överklagande</strong></p>
+    <pre id="p3">Ett avslag från Försäkringskassan är inte slutet.
+
+Men blanketten är det, för de flesta.
+
+Skrivklart skriver överklagandet sakligt. Du fyller i vad som hände. Vi tar tonen.
+
+199 kr. Inte juridisk rådgivning.
+
+https://klartext-chi.vercel.app/dokument/overklagande</pre>
+    <button class="copy" data-copy="p3">Kopiera inlägg 3</button>
+  </div>
+  <div class="card">
+    <p><strong>4 · Samboavtal</strong></p>
+    <pre id="p4">Samboavtal är obehagligt att ta upp. Ännu obehagligare när det redan bråkas.
+
+Skriv det medan ni är sams.
+
+149 kr. Utkast du läser tillsammans.
+
+https://klartext-chi.vercel.app/dokument/samboavtal</pre>
+    <button class="copy" data-copy="p4">Kopiera inlägg 4</button>
+  </div>
+  <div class="card">
+    <p><strong>5 · Pris</strong></p>
+    <pre id="p5">En jurist tar timpenning. ChatGPT ger en text du inte vågar skicka.
+
+Skrivklart: 79–199 kr styck. Jobbpaket 199 kr (brev + CV + LinkedIn). Pro 249 kr/mån.
+
+Inget konto. Stripe. Klart på ungefär en minut.
+
+https://klartext-chi.vercel.app/priser</pre>
+    <button class="copy" data-copy="p5">Kopiera inlägg 5</button>
+  </div>
+
+  <h2>5. DNS — namnservrarna är rätt</h2>
+  <div class="card">
+    <p class="ok">Loopia är ifyllt rätt:</p>
+    <pre>ns1.vercel-dns.com
+ns2.vercel-dns.com</pre>
+    <p class="warn">Ändra inte namnservrarna igen.</p>
+    <p>Vercel svarar REFUSED på zonen, därför står det Invalid Configuration. Zonen saknas hos Vercel — väntan fixar inte det.</p>
+    <p><strong>Ett klick som faktiskt lossar det</strong> (Loopia, ~60 sek):</p>
+    <ol>
+      <li>Loopia → Byt namnservrar → tillbaka till Loopias egna (<code>ns1.loopia.se</code> / <code>ns2.loopia.se</code>).</li>
+      <li>Loopia DNS-zon, två rader:
+        <pre>A      @     76.76.21.21
+CNAME  www   cname.vercel-dns.com</pre>
+      </li>
+    </ol>
+    <p class="muted">Det är metoden Vercel redan ber om under «View DNS configuration». Namnservrar till Vercel + A-poster hos Loopia samtidigt = dött.</p>
+  </div>
+
+  <p class="muted">Butiken är live på <a href="https://klartext-chi.vercel.app">klartext-chi.vercel.app</a> oavsett domän.</p>
+</main>
+<script>
+document.querySelectorAll("button.copy").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const id = btn.getAttribute("data-copy");
+    const text = document.getElementById(id).innerText;
+    await navigator.clipboard.writeText(text);
+    const prev = btn.textContent;
+    btn.textContent = "Kopierat";
+    setTimeout(() => { btn.textContent = prev; }, 1200);
+  });
+});
+</script>
+</body>
+</html>
