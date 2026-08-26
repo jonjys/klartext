@@ -56,9 +56,9 @@ Personligt brev, överklagande, samboavtal.
   </div>
   <div class="card">
     <p><strong>Länk</strong></p>
-    <pre id="t-link">https://klartext-chi.vercel.app</pre>
+    <pre id="t-link">https://www.skrivklart.se</pre>
     <button class="copy" data-copy="t-link">Kopiera länk</button>
-    <p class="muted">Byt till https://skrivklart.se när Vercel visar Valid Configuration.</p>
+    <p class="muted">Det här är länken. Punkt.</p>
   </div>
   <div class="card">
     <p><strong>Intressen</strong> — ta bort «juridik». Vi ger inte juridisk rådgivning.</p>
@@ -87,7 +87,7 @@ Svenska dokument: brev, överklagande, samboavtal.
   </div>
   <div class="card">
     <p><strong>Webbplats + plats</strong></p>
-    <pre id="x-web">https://klartext-chi.vercel.app
+    <pre id="x-web">https://www.skrivklart.se
 Sverige</pre>
     <button class="copy" data-copy="x-web">Kopiera</button>
   </div>
@@ -106,7 +106,7 @@ Det är inte «AI som skriver allt». Det är texten du fryser på.
 Skrivklart. Utkastet är gratis. Hela texten 79–199 kr.
 Inte juridisk rådgivning — ett utkast du kan skicka.
 
-https://klartext-chi.vercel.app</pre>
+https://www.skrivklart.se</pre>
     <button class="copy" data-copy="p1">Kopiera inlägg 1</button>
   </div>
   <div class="card">
@@ -119,7 +119,7 @@ Skrivklart skriver brevet från det du faktiskt gjort. Inte från en mall.
 
 89 kr. Utkastet är gratis.
 
-https://klartext-chi.vercel.app/dokument/personligt-brev</pre>
+https://www.skrivklart.se/dokument/personligt-brev</pre>
     <button class="copy" data-copy="p2">Kopiera inlägg 2</button>
   </div>
   <div class="card">
@@ -132,7 +132,7 @@ Vi skriver överklagandet sakligt, på svenska, från dina fakta.
 
 199 kr. Inte juridisk rådgivning.
 
-https://klartext-chi.vercel.app/dokument/overklagande</pre>
+https://www.skrivklart.se/dokument/overklagande</pre>
     <button class="copy" data-copy="p3">Kopiera inlägg 3</button>
   </div>
   <div class="card">
@@ -143,7 +143,7 @@ Inte när någon redan har flyttat ut halva köket.
 
 149 kr. Ett utkast ni läser vid köksbordet.
 
-https://klartext-chi.vercel.app/dokument/samboavtal</pre>
+https://www.skrivklart.se/dokument/samboavtal</pre>
     <button class="copy" data-copy="p4">Kopiera inlägg 4</button>
   </div>
   <div class="card">
@@ -155,29 +155,28 @@ Ett personligt brev ska inte låta som ChatGPT.
 Skrivklart: ett dokument, 79–199 kr. Jobbpaket 199. Pro 249/mån.
 Inget konto. Stripe. Klart på ungefär en minut.
 
-https://klartext-chi.vercel.app/priser</pre>
+https://www.skrivklart.se/priser</pre>
     <button class="copy" data-copy="p5">Kopiera inlägg 5</button>
   </div>
 
-  <h2>5. DNS — namnservrarna är rätt</h2>
+  <h2>5. DNS — bara www just nu</h2>
   <div class="card">
-    <p class="ok">Loopia är ifyllt rätt:</p>
-    <pre>ns1.vercel-dns.com
-ns2.vercel-dns.com</pre>
-    <p class="warn">Ändra inte namnservrarna igen till samma värden.</p>
-    <p>Vercel svarar REFUSED på zonen, därför står det Invalid Configuration. 308 mot www är okej — zonen saknas ändå.</p>
-    <p><strong>Ett klick som faktiskt lossar det</strong> (Loopia, ~60 sek):</p>
+    <p class="warn">Vercel-namnservrar är varför det är rött. Byt bort dem.</p>
+    <p>Loopia, tre steg, sedan är <strong>www.skrivklart.se</strong> igång. Apex kan vänta.</p>
     <ol>
-      <li>Loopia → Byt namnservrar → tillbaka till Loopias egna (<code>ns1.loopia.se</code> / <code>ns2.loopia.se</code>).</li>
-      <li>Loopia DNS-zon, två rader:
-        <pre>A      @     76.76.21.21
-CNAME  www   cname.vercel-dns.com</pre>
+      <li>Loopia → skrivklart.se → <strong>Namnservrar</strong> → använd Loopias egna:
+        <pre>ns1.loopia.se
+ns2.loopia.se</pre>
       </li>
+      <li>Loopia → <strong>DNS</strong> → ny post:
+        <pre>CNAME  www  cname.vercel-dns.com</pre>
+      </li>
+      <li>Vercel → Domains → www.skrivklart.se → Refresh.</li>
     </ol>
-    <p class="muted">Det är metoden Vercel redan ber om under «View DNS configuration».</p>
+    <p class="muted">Ingen A-post än. Ingen apex. Bara www.</p>
   </div>
 
-  <p class="muted">Butiken är live på <a href="https://klartext-chi.vercel.app">klartext-chi.vercel.app</a> oavsett domän.</p>
+  <p class="muted">När DNS är grön: <a href="https://www.skrivklart.se">www.skrivklart.se</a></p>
 </main>
 <script>
 document.querySelectorAll("button.copy").forEach((btn) => {

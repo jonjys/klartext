@@ -6,8 +6,7 @@ Utkastet är gratis. Hela texten efter betalning via Stripe.
 
 **Detta är inte juridisk rådgivning.**
 
-Live nu: https://klartext-chi.vercel.app  
-Domän: https://skrivklart.se (Loopia → Vercel)
+Live: https://www.skrivklart.se
 
 Repo: https://github.com/jonjys/klartext
 

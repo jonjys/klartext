@@ -3,4 +3,4 @@ Allow: /
 Disallow: /brand.html
 Disallow: /brand/
 
-Sitemap: https://skrivklart.se/sitemap.xml
+Sitemap: https://www.skrivklart.se/sitemap.xml
