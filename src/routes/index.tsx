@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "Klartext — svenska dokument, färdiga" },
+      { title: "Skrivklart — samboavtal, överklagande, hyresansökan" },
       { name: "description", content: SITE_DESCRIPTION },
     ],
   }),
@@ -71,7 +71,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 sm:pt-20 sm:pb-24">
         <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">Svenska dokument, färdiga</p>
         <h1 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1.08] tracking-tight text-ink sm:text-6xl">
-          Vi skriver det du fryser på.
+          Samboavtal efter bråket.
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
           Personligt brev. Överklagande. Samboavtal. Du fyller i fakta – Klartext skriver

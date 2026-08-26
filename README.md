@@ -1,6 +1,6 @@
 # Klartext
 
-AI som skriver svenska dokument folk fryser på. Personligt brev, överklagande, samboavtal, reklamation, ARN, uppsägning och fler. 79–199 kr styck, Jobbpaket 199 kr, Pro 249 kr/mån.
+Samboavtal, överklagande till FK, hyresansökan och fler svenska dokument. 79–199 kr styck, Jobbpaket 199 kr, Pro 249 kr/mån.
 
 Utkastet är gratis. Hela texten efter betalning via Stripe.
 

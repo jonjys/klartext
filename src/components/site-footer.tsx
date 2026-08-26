@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div>
           <p className="font-display text-lg italic text-ink">Klartext</p>
           <p className="mt-2 max-w-xs text-sm text-muted">
-            Vi skriver det du fryser på. Utkast, inte juridisk rådgivning.
+            Samboavtal, överklagande, hyresansökan. Utkast, inte juridisk rådgivning.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
