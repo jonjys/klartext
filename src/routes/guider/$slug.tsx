@@ -3,6 +3,7 @@ import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { getProduct } from "@/lib/catalog";
 import { getGuide } from "@/lib/guides";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { sek } from "@/lib/utils";
 
 export const Route = createFileRoute("/guider/$slug")({
@@ -13,12 +14,13 @@ export const Route = createFileRoute("/guider/$slug")({
   },
   head: ({ loaderData }) => {
     const guide = loaderData?.guide;
-    if (!guide) return { meta: [{ title: "Guider — Klartext" }] };
+    if (!guide) return { meta: [{ title: `Guider — ${SITE_NAME}` }] };
     return {
       meta: [
-        { title: `${guide.title} — Klartext` },
+        { title: `${guide.title} | ${SITE_NAME}` },
         { name: "description", content: guide.excerpt },
       ],
+      links: [{ rel: "canonical", href: `${SITE_URL}/guider/${guide.slug}` }],
     };
   },
   component: GuidePage,

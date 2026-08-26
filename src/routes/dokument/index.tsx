@@ -11,7 +11,7 @@ export const Route = createFileRoute("/dokument/")({
   component: DokumentIndex,
   head: () => ({
     meta: [
-      { title: "Dokument — Klartext" },
+      { title: "Dokument | Skrivklart" },
       {
         name: "description",
         content: "Personligt brev, överklagande, samboavtal, hyresansökan och fler. Utkast gratis, 79–199 kr för hela texten.",

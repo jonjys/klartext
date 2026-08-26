@@ -17,6 +17,7 @@ export const Route = createFileRoute("/")({
       { title: "Skrivklart — samboavtal, överklagande, hyresansökan" },
       { name: "description", content: SITE_DESCRIPTION },
     ],
+    links: [{ rel: "canonical", href: SITE_URL }],
   }),
 });
 
@@ -29,7 +30,7 @@ const STEPS = [
 const FAQ = [
   {
     q: "Är det juridisk rådgivning?",
-    a: "Nej. Klartext skriver utkast. Du läser, ändrar och ansvarar för det du skickar. För komplicerade fall: anlita en jurist.",
+    a: "Nej. Skrivklart skriver utkast. Du läser, ändrar och ansvarar för det du skickar. För komplicerade fall: anlita en jurist.",
   },
   {
     q: "Vem ser det jag skriver?",
@@ -47,18 +48,44 @@ const FAQ = [
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: SITE_NAME,
-  url: SITE_URL,
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  offers: {
-    "@type": "AggregateOffer",
-    priceCurrency: "SEK",
-    lowPrice: "79",
-    highPrice: "249",
-  },
-  description: SITE_DESCRIPTION,
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+      inLanguage: "sv-SE",
+      description: SITE_DESCRIPTION,
+    },
+    {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/profil.jpg`,
+      areaServed: "SE",
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: SITE_NAME,
+      url: SITE_URL,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "SEK",
+        lowPrice: "79",
+        highPrice: "249",
+      },
+      description: SITE_DESCRIPTION,
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: FAQ.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ],
 };
 
 function Home() {
@@ -74,7 +101,7 @@ function Home() {
           Samboavtal efter bråket.
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-          Personligt brev. Överklagande. Samboavtal. Du fyller i fakta – Klartext skriver
+          Personligt brev. Överklagande. Samboavtal. Du fyller i fakta – Skrivklart skriver
           texten. {sek(79)}–{sek(199)}. Inget konto.
         </p>
         <p className="mt-3 text-sm text-subtle">Stripe · Utkast gratis · Klart på ungefär en minut</p>

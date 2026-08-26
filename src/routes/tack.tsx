@@ -14,7 +14,10 @@ export const Route = createFileRoute("/tack")({
     slug: typeof search.slug === "string" ? search.slug : undefined,
   }),
   head: () => ({
-    meta: [{ title: "Tack — Klartext" }],
+    meta: [
+      { title: "Tack — Skrivklart" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
   }),
 });
 

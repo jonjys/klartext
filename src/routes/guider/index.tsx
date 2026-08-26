@@ -6,7 +6,7 @@ export const Route = createFileRoute("/guider/")({
   component: GuiderIndex,
   head: () => ({
     meta: [
-      { title: "Guider — Klartext" },
+      { title: "Guider | Skrivklart" },
       {
         name: "description",
         content: "Korta guider: överklaga Försäkringskassan, samboavtal, hyresansökan, CV utan floskler.",

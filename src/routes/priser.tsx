@@ -14,7 +14,7 @@ export const Route = createFileRoute("/priser")({
   component: PriserPage,
   head: () => ({
     meta: [
-      { title: "Priser — Klartext" },
+      { title: "Priser | Skrivklart" },
       {
         name: "description",
         content: "Ett dokument 79–199 kr. Klartext Pro 249 kr/mån. Inget konto för enstaka dokument.",

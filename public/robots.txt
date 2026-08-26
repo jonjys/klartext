@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /brand.html
 Disallow: /brand/
+Disallow: /profil.html
+Disallow: /tack
 
 Sitemap: https://www.skrivklart.se/sitemap.xml

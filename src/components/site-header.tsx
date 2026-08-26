@@ -17,7 +17,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-line/80 bg-bg/90 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6">
         <Link to="/" className="font-display text-xl italic tracking-tight text-ink">
-          Klartext
+          Skrivklart
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
