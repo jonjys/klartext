@@ -133,6 +133,29 @@ export function Generator({ product }: { product: DocProduct }) {
     URL.revokeObjectURL(a.href);
   }
 
+  function downloadHtml() {
+    const text = unlocked ? full || preview : preview;
+    const escaped = text
+      .replaceAll("&", "&")
+      .replaceAll("<", "<")
+      .replaceAll(">", ">");
+    const html = `<!doctype html><html lang="sv"><head><meta charset="utf-8"><title>${product.name}</title>
+<style>
+  body{font-family:Georgia,"Iowan Old Style",serif;max-width:40rem;margin:2.5rem auto;padding:0 1.25rem;line-height:1.65;color:#1c1b18;background:#fffdf8}
+  h1{font-size:1.15rem;font-weight:600;letter-spacing:-0.02em}
+  pre{white-space:pre-wrap;font-family:inherit;font-size:1.05rem}
+</style></head><body>
+<h1>${product.name}</h1>
+<pre>${escaped}</pre>
+</body></html>`;
+    const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `${product.slug}.html`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
   return (
     <div className="grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-start">
       <form
@@ -287,7 +310,17 @@ export function Generator({ product }: { product: DocProduct }) {
               disabled={!unlocked}
             >
               <Download className="size-3.5" />
-              Ladda ner
+              Textfil
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={downloadHtml}
+              disabled={!unlocked}
+            >
+              <Download className="size-3.5" />
+              HTML
             </Button>
             <Button
               type="button"

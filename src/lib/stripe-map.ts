@@ -13,6 +13,11 @@ export const STRIPE_PRICES: Record<string, string> = {
   "linkedin-profil": "price_1U8hoDBEo0YzuylwldoWdg1M",
   klagomal: "price_1U8hoFBEo0YzuylwIxt6Iyof",
   sekretessavtal: "price_1U8hoHBEo0Yzuylwh9C0EgbU",
+  uppsagning: "price_1U8iOkBEo0YzuylwJTgSIvBB",
+  "arn-anmalan": "price_1U8iOwBEo0YzuylwoNFSHCU7",
+  anstallningsavtal: "price_1U8iOxBEo0YzuylwAiBYGe7A",
+  fullmakt: "price_1U8iOzBEo0Yzuylw8WjmFBBb",
+  jobbpaket: "price_1U8iP1BEo0YzuylwnzGvRI7M",
 };
 
 /** Live Payment Links. */
@@ -30,6 +35,14 @@ export const STRIPE_PAYMENT_LINKS: Record<string, string> = {
   "linkedin-profil": "https://buy.stripe.com/5kQdR8eCte3kbGMgLz8og0c",
   klagomal: "https://buy.stripe.com/bJedR8bqh7EW7qw52R8og0d",
   sekretessavtal: "https://buy.stripe.com/00waEW51T3oG128brf8og0e",
+  uppsagning: "https://buy.stripe.com/fZu28qdyp6ASeSY8f38og0f",
+  "arn-anmalan": "https://buy.stripe.com/bJe4gyeCtaR88uA3YN8og0g",
+  anstallningsavtal: "https://buy.stripe.com/5kQeVc3XP0cu9yE66V8og0h",
+  fullmakt: "https://buy.stripe.com/28E6oG3XPcZg8uA3YN8og0i",
+  jobbpaket: "https://buy.stripe.com/7sY6oGamd8J0dOU8f38og0j",
 };
 
 export const PRO_SLUG = "pro";
+export const JOB_PACK_SLUG = "jobbpaket";
+export const JOB_PACK_UNLOCKS = ["personligt-brev", "cv-text", "linkedin-profil"] as const;
+export const JOB_PACK_PRICE_KR = 199;

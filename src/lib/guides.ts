@@ -134,6 +134,42 @@ export const GUIDES: Guide[] = [
       "Tre styrkor max, kopplade till sådant du kan peka på i punkterna under. Resten är brus de redan sett hundra gånger.",
     ],
   },
+  {
+    slug: "uppsagning-mall",
+    title: "Mall: säga upp sig utan drama",
+    excerpt: "Datum, tjänst, sista dag. HR behöver inte din livsberättelse.",
+    productSlug: "uppsagning",
+    minutes: 3,
+    body: [
+      "Ett uppsägningsbrev är ett meddelande, inte ett avskedstal. Skriv vem du är, vilken tjänst, och från vilket datum anställningen upphör.",
+      "Kolla avtalet och lagen för uppsägningstid. Skriv den tid du räknar med, inte den du önskar.",
+      "Be om skriftlig bekräftelse, arbetsgivarintyg och slutlön. Punkt. Skicka till chef och HR samma dag.",
+    ],
+  },
+  {
+    slug: "arn-anmalan-steg",
+    title: "ARN-anmälan: när företaget sagt nej",
+    excerpt: "Först reklamation. Sen nämnden. Inte tvärtom.",
+    productSlug: "arn-anmalan",
+    minutes: 4,
+    body: [
+      "ARN prövar tvister mellan konsument och näringsidkare. De vill se att du redan krävt rättelse.",
+      "Skriv parter, vad du köpt, vad som är fel, vad du yrkar, och bifoga kvitto plus företagets svar.",
+      "Håll känslor utanför. Nämnden läser yrkandet, inte din recension av kundtjänsten.",
+    ],
+  },
+  {
+    slug: "fullmakt-nar-du-inte-kan-ga-sjalv",
+    title: "Fullmakt när du inte kan gå själv",
+    excerpt: "Vem, vad, hur länge. Resten är vittnen om du vill vara extra tydlig.",
+    productSlug: "fullmakt",
+    minutes: 3,
+    body: [
+      "En fullmakt är en tillåtelse på papper. Ju snävare uppdrag, desto mindre kan den missbrukas.",
+      "Skriv namn på båda, exakt vad den får göra, och ett slutdatum. 'Tills vidare' går, men datum är lugnare.",
+      "Bank och mäklare kan kräva original och vittnen. Fråga dem innan du skriver, så du inte får göra om.",
+    ],
+  },
 ];
 
 export function getGuide(slug: string) {

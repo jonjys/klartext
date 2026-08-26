@@ -20,6 +20,7 @@ import { Route as DokumentIndexRouteImport } from './routes/dokument/index'
 import { Route as DokumentSlugRouteImport } from './routes/dokument/$slug'
 import { Route as GuiderIndexRouteImport } from './routes/guider/index'
 import { Route as GuiderSlugRouteImport } from './routes/guider/$slug'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe.webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const GuiderSlugRoute = GuiderSlugRouteImport.update({
   path: '/guider/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe/webhook',
+  path: '/api/stripe/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/guider/$slug': typeof GuiderSlugRoute
   '/dokument/': typeof DokumentIndexRoute
   '/guider/': typeof GuiderIndexRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/guider/$slug': typeof GuiderSlugRoute
   '/dokument': typeof DokumentIndexRoute
   '/guider': typeof GuiderIndexRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/guider/$slug': typeof GuiderSlugRoute
   '/dokument/': typeof DokumentIndexRoute
   '/guider/': typeof GuiderIndexRoute
+  '/api/stripe/webhook': typeof ApiStripeWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/guider/$slug'
     | '/dokument/'
     | '/guider/'
+    | '/api/stripe/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/guider/$slug'
     | '/dokument'
     | '/guider'
+    | '/api/stripe/webhook'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/guider/$slug'
     | '/dokument/'
     | '/guider/'
+    | '/api/stripe/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +183,7 @@ export interface RootRouteChildren {
   GuiderSlugRoute: typeof GuiderSlugRoute
   DokumentIndexRoute: typeof DokumentIndexRoute
   GuiderIndexRoute: typeof GuiderIndexRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuiderSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/stripe/webhook': {
+      id: '/api/stripe/webhook'
+      path: '/api/stripe/webhook'
+      fullPath: '/api/stripe/webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   GuiderSlugRoute: GuiderSlugRoute,
   DokumentIndexRoute: DokumentIndexRoute,
   GuiderIndexRoute: GuiderIndexRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

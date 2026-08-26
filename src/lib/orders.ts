@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getProduct, PRO_PRICE_KR } from "./catalog";
 import { getSql } from "./db";
-import { STRIPE_PRICES } from "./stripe-map";
+import { JOB_PACK_PRICE_KR, JOB_PACK_SLUG, STRIPE_PRICES } from "./stripe-map";
 import { uid } from "./utils";
 
 async function stripeCheckoutUrl(opts: {
@@ -12,12 +12,13 @@ async function stripeCheckoutUrl(opts: {
 }) {
   const key = process.env.STRIPE_SECRET_KEY;
   if (!key) return null;
-  const success =
-    opts.slug === "pro"
-      ? `${opts.origin}/tack?token=${encodeURIComponent(opts.token)}&slug=pro`
-      : `${opts.origin}/tack?token=${encodeURIComponent(opts.token)}&slug=${encodeURIComponent(opts.slug)}`;
+  const success = `${opts.origin}/tack?token=${encodeURIComponent(opts.token)}&slug=${encodeURIComponent(opts.slug)}`;
   const cancel =
-    opts.slug === "pro" ? `${opts.origin}/priser` : `${opts.origin}/dokument/${opts.slug}`;
+    opts.slug === "pro"
+      ? `${opts.origin}/priser`
+      : opts.slug === JOB_PACK_SLUG
+        ? `${opts.origin}/priser`
+        : `${opts.origin}/dokument/${opts.slug}`;
   const body = new URLSearchParams();
   body.set("mode", opts.slug === "pro" ? "subscription" : "payment");
   body.set("success_url", success);
@@ -45,10 +46,11 @@ export const createOrder = createServerFn({ method: "POST" })
   .validator((input: { slug: string; origin?: string }) => input)
   .handler(async ({ data }) => {
     const isPro = data.slug === "pro";
-    const product = isPro ? null : getProduct(data.slug);
-    if (!isPro && !product) return { ok: false as const, error: "Okänt dokument." };
+    const isPack = data.slug === JOB_PACK_SLUG;
+    const product = isPro || isPack ? null : getProduct(data.slug);
+    if (!isPro && !isPack && !product) return { ok: false as const, error: "Okänt dokument." };
 
-    const amount = isPro ? PRO_PRICE_KR : product!.priceKr;
+    const amount = isPro ? PRO_PRICE_KR : isPack ? JOB_PACK_PRICE_KR : product!.priceKr;
     const token = uid();
     try {
       const sql = await getSql();

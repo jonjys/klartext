@@ -4,7 +4,7 @@ import { SiteFrame } from "@/components/site-frame";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS, PRO_PRICE_KR } from "@/lib/catalog";
 import { createOrder, markPaid } from "@/lib/orders";
-import { STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
+import { JOB_PACK_SLUG, STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
 import { useKlartext } from "@/lib/store";
 import { isLocalHost, sek } from "@/lib/utils";
 import { useState } from "react";
@@ -25,18 +25,19 @@ export const Route = createFileRoute("/priser")({
 
 function PriserPage() {
   const unlockPro = useKlartext((s) => s.unlockPro);
+  const unlockJobPack = useKlartext((s) => s.unlockJobPack);
   const hasPro = useKlartext((s) => s.hasPro());
   const [busy, setBusy] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
-  async function buyPro() {
+  async function checkout(slug: string, onLocalPaid: () => void) {
     setBusy(true);
     const order = await createOrder({
-      data: { slug: "pro", origin: window.location.origin },
+      data: { slug, origin: window.location.origin },
     });
-    const link = STRIPE_PAYMENT_LINKS.pro;
+    const link = STRIPE_PAYMENT_LINKS[slug];
     if (link && !isLocalHost() && order.ok) {
-      sessionStorage.setItem("klartext:pending", JSON.stringify({ token: order.token, slug: "pro" }));
+      sessionStorage.setItem("klartext:pending", JSON.stringify({ token: order.token, slug }));
       if (order.checkoutUrl) {
         window.location.href = order.checkoutUrl;
         return;
@@ -48,9 +49,22 @@ function PriserPage() {
     }
     await new Promise((r) => setTimeout(r, 700));
     if (order.ok) await markPaid({ data: { token: order.token } });
-    unlockPro();
+    onLocalPaid();
     setBusy(false);
-    toast.success("Pro är aktivt i 30 dagar.");
+  }
+
+  async function buyPro() {
+    await checkout("pro", () => {
+      unlockPro();
+      toast.success("Pro är aktivt i 30 dagar.");
+    });
+  }
+
+  async function buyPack() {
+    await checkout(JOB_PACK_SLUG, () => {
+      unlockJobPack();
+      toast.success("Jobbpaketet är olåst.");
+    });
   }
 
   return (
@@ -89,7 +103,7 @@ function PriserPage() {
             <ul className="mt-6 space-y-2 text-sm text-paper/80">
               {[
                 "Obegränsade dokument",
-                "Alla tolv typer",
+                "Alla sexton typer",
                 "Obegränsade omskrivningar",
                 "Ingen per-dokument-avgift",
               ].map((t) => (
@@ -122,6 +136,27 @@ function PriserPage() {
                 {hasPro ? "Pro är aktivt" : "Starta Pro"}
               </Button>
             )}
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-xl border border-line bg-paper p-6 sm:p-8">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted">Jobbpaket</p>
+              <p className="mt-2 font-display text-3xl tracking-tight">199 kr</p>
+              <p className="mt-2 max-w-md text-sm text-muted">
+                Personligt brev, CV-profil och LinkedIn. Ett köp i stället för tre. 30 dagar i
+                den här webbläsaren.
+              </p>
+            </div>
+            <Button
+              type="button"
+              className="w-full md:w-auto"
+              onClick={() => void buyPack()}
+              disabled={busy}
+            >
+              Köp jobbpaketet
+            </Button>
           </div>
         </div>
 

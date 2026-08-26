@@ -77,6 +77,7 @@ function Home() {
           Personligt brev. Överklagande. Samboavtal. Du fyller i fakta – Klartext skriver
           texten. {sek(79)}–{sek(199)}. Inget konto.
         </p>
+        <p className="mt-3 text-sm text-subtle">Stripe · Utkast gratis · Klart på ungefär en minut</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg">
             <Link to="/dokument">
@@ -111,7 +112,7 @@ function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Tolv dokument som folk släpar på</h2>
+          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Sexton dokument som folk släpar på</h2>
           <Link to="/dokument" className="hidden text-sm font-medium text-pine sm:inline">
             Alla dokument
           </Link>
@@ -124,6 +125,22 @@ function Home() {
         <Button asChild variant="outline" className="mt-6 sm:hidden">
           <Link to="/dokument">Alla dokument</Link>
         </Button>
+      </section>
+
+      <section className="border-y border-line bg-ink text-paper">
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-14">
+          <div>
+            <p className="text-xs font-medium tracking-[0.18em] text-paper/60 uppercase">Jobbpaket</p>
+            <h2 className="mt-2 font-display text-3xl tracking-tight">Brev, CV och LinkedIn. Ett köp.</h2>
+            <p className="mt-2 max-w-lg text-sm leading-relaxed text-paper/75">
+              Tre dokument som hör ihop, {sek(199)} i stället för {sek(257)}. Olåsta i 30 dagar i
+              den här webbläsaren.
+            </p>
+          </div>
+          <Button asChild size="lg" variant="outline" className="border-paper/20 bg-paper text-ink hover:bg-bg-elevated">
+            <Link to="/priser">Köp jobbpaketet</Link>
+          </Button>
+        </div>
       </section>
 
       <section className="border-y border-line bg-paper">
