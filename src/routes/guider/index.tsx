@@ -20,7 +20,7 @@ function GuiderIndex() {
     <SiteFrame>
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <h1 className="font-display text-4xl tracking-tight sm:text-5xl">Guider</h1>
-        <p className="mt-3 text-muted">Korta texter om sakerna Klartext skriver. Ingen kurs. Inga nyhetsbrev.</p>
+        <p className="mt-3 text-muted">Korta texter om sakerna Skrivklart skriver. Ingen kurs. Inga nyhetsbrev.</p>
         <div className="mt-10 space-y-4">
           {GUIDES.map((g) => (
             <Link

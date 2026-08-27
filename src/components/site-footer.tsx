@@ -11,6 +11,9 @@ export function SiteFooter() {
           </p>
         </div>
         <div className="grid grid-cols-2 gap-x-10 gap-y-2 text-sm">
+          <Link to="/brev" className="text-muted hover:text-ink">
+            Myndighetsbrev
+          </Link>
           <Link to="/dokument" className="text-muted hover:text-ink">
             Dokument
           </Link>

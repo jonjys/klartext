@@ -90,7 +90,17 @@ const jsonLd = {
 
 function Home() {
   const stats = Route.useLoaderData();
-  const featured = PRODUCTS.slice(0, 6);
+  const featuredSlugs = [
+    "samboavtal",
+    "overklagande",
+    "myndighetsbrev",
+    "hyresansokan",
+    "personligt-brev",
+    "reklamation",
+  ];
+  const featured = featuredSlugs
+    .map((slug) => PRODUCTS.find((p) => p.slug === slug))
+    .filter((p): p is (typeof PRODUCTS)[number] => Boolean(p));
 
   return (
     <SiteFrame>

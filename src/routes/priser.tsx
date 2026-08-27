@@ -17,7 +17,7 @@ export const Route = createFileRoute("/priser")({
       { title: "Priser | Skrivklart" },
       {
         name: "description",
-        content: "Ett dokument 79–199 kr. Klartext Pro 249 kr/mån. Inget konto för enstaka dokument.",
+        content: "Ett dokument 79–199 kr. Skrivklart Pro 249 kr/mån. Inget konto för enstaka dokument.",
       },
     ],
   }),
@@ -98,12 +98,12 @@ function PriserPage() {
           </div>
 
           <div className="rounded-xl border border-ink bg-ink p-6 text-paper sm:p-8">
-            <p className="text-sm font-medium text-paper/70">Klartext Pro</p>
+            <p className="text-sm font-medium text-paper/70">Skrivklart Pro</p>
             <p className="mt-2 font-display text-4xl tracking-tight">{sek(PRO_PRICE_KR)}/mån</p>
             <ul className="mt-6 space-y-2 text-sm text-paper/80">
               {[
                 "Obegränsade dokument",
-                "Alla sexton typer",
+                "Alla dokumenttyper",
                 "Obegränsade omskrivningar",
                 "Ingen per-dokument-avgift",
               ].map((t) => (

@@ -9,14 +9,14 @@ function OmPage() {
   return (
     <SiteFrame>
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
-        <h1 className="font-display text-4xl tracking-tight">Om Klartext</h1>
+        <h1 className="font-display text-4xl tracking-tight">Om Skrivklart</h1>
         <div className="mt-6 space-y-4 text-base leading-relaxed text-muted">
           <p>
             De flesta fastnar inte för att de inte kan skriva. De fastnar för att texten ska vara
             formell, svensk och omöjlig att ångra – och blanketten sitter i kroppen.
           </p>
           <p>
-            Klartext tar dina fakta och skriver utkastet. Du läser. Du ändrar. Du skickar. Vi är
+            Skrivklart tar dina fakta och skriver utkastet. Du läser. Du ändrar. Du skickar. Vi är
             inte en juristbyrå, inte ett fackförbund, inte Skatteverket.
           </p>
           <p>

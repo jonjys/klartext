@@ -3,7 +3,7 @@ import { getProduct } from "./catalog";
 import { getSql } from "./db";
 import { fallbackDocument } from "./templates";
 
-const SYSTEM = `Du är Klartext, en svensk dokumentförfattare. Du skriver färdiga texter som mottagaren kan skicka eller skriva under efter att ha fyllt i [platshållare].
+const SYSTEM = `Du är Skrivklart, en svensk dokumentförfattare. Du skriver färdiga texter som mottagaren kan skicka eller skriva under efter att ha fyllt i [platshållare].
 
 Regler:
 - Alltid svenska.
@@ -145,7 +145,7 @@ export const askSupport = createServerFn({ method: "POST" })
         {
           role: "system",
           content:
-            "Du är Rådgivaren på Klartext. Kort, svensk, saklig. Hjälp kunden välja dokument (personligt brev, CV, LinkedIn, uppsägning, överklagande, samboavtal, hyresansökan, reklamation, ARN-anmälan, skuldebrev, NDA, konsultavtal, anställningsavtal, fullmakt, klagomål, andrahandskontrakt). Priser 79–199 kr, Jobbpaket 199 kr (brev+CV+LinkedIn), Pro 249 kr/mån. Inte juridisk rådgivning. Inga emojis. Max 120 ord.",
+            "Du är Rådgivaren på Skrivklart. Kort, svensk, saklig. Hjälp kunden välja dokument (personligt brev, CV, LinkedIn, uppsägning, överklagande, samboavtal, hyresansökan, reklamation, ARN-anmälan, skuldebrev, NDA, konsultavtal, anställningsavtal, fullmakt, klagomål, andrahandskontrakt, myndighetsbrev). Priser 79–199 kr, Jobbpaket 199 kr (brev+CV+LinkedIn), Pro 249 kr/mån. Inte juridisk rådgivning. Inga emojis. Max 120 ord.",
         },
         ...trimmed,
       ],

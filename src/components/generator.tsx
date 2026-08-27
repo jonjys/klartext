@@ -359,7 +359,7 @@ export function Generator({ product }: { product: DocProduct }) {
         ) : null}
 
         <p className="mt-4 text-xs leading-relaxed text-subtle">
-          Klartext skriver utkast. Det är inte juridisk rådgivning och ersätter inte en jurist,
+          Skrivklart skriver utkast. Det är inte juridisk rådgivning och ersätter inte en jurist,
           fackförbund eller myndighetens egna blanketter. Läs igenom innan du skickar eller
           skriver under.
         </p>

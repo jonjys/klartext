@@ -42,7 +42,7 @@ function SupportPage() {
         <h1 className="font-display text-4xl tracking-tight">Support</h1>
         <p className="mt-3 text-muted">
           Rådgivaren svarar direkt. Inte juridisk rådgivning – hjälp att välja dokument och förstå
-          hur Klartext fungerar.
+          hur Skrivklart fungerar.
         </p>
         <div className="mt-8 rounded-xl border border-line bg-paper p-5 shadow-[var(--shadow-soft)]">
           <div className="min-h-72 space-y-3">
