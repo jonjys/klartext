@@ -4,6 +4,7 @@ import { SiteFrame } from "@/components/site-frame";
 import { getProduct } from "@/lib/catalog";
 import { recordEvent } from "@/lib/ai";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { productOffer, siteImage } from "@/lib/schema";
 import { sek } from "@/lib/utils";
 import { useEffect } from "react";
 
@@ -57,15 +58,10 @@ function DokumentPage() {
             "@type": "Product",
             name: product.name,
             description: product.pitch,
+            image: siteImage,
             brand: { "@type": "Brand", name: SITE_NAME },
             url: `${SITE_URL}/dokument/${product.slug}`,
-            offers: {
-              "@type": "Offer",
-              priceCurrency: "SEK",
-              price: String(product.priceKr),
-              availability: "https://schema.org/InStock",
-              url: `${SITE_URL}/dokument/${product.slug}`,
-            },
+            offers: productOffer(product.priceKr, `${SITE_URL}/dokument/${product.slug}`),
           }),
         }}
       />

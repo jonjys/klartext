@@ -23,7 +23,7 @@ function VillkorPage() {
           </p>
           <p>
             Ångerrätt: digitala tjänster som levereras direkt kan omfattas av undantag. Hör av dig
-            via support inom 24 timmar om texten är uppenbart oanvändbar – vi tar det då.
+            via support inom 24 timmar om texten är uppenbart oanvändbar – då återbetalar vi.
           </p>
           <p>Vi kan stänga av missbruk, automatiserade anrop och uppenbara försök att kringgå betalning.</p>
           <p>Svensk lag. Tvist i svensk allmän domstol.</p>
