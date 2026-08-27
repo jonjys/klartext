@@ -1,6 +1,6 @@
 import { SITE_NAME, SITE_URL } from "./site";
 
-const IMAGE = `${SITE_URL}/og-skrivklart.jpg`;
+const IMAGE = `${SITE_URL}/og-sv.jpg`;
 const TERMS = `${SITE_URL}/villkor`;
 
 /** Digital text levereras direkt. Ingen retur — utkastet är gratis att prova. */
