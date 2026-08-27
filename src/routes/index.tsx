@@ -24,10 +24,17 @@ export const Route = createFileRoute("/")({
 });
 
 const STEPS = [
-  { n: "01", t: "Välj dokument", d: "Brev, avtal, överklagande. Ett formulär, inget konto." },
-  { n: "02", t: "Skriv utkast", d: "Du fyller i fakta. Vi skriver texten på ungefär en minut." },
-  { n: "03", t: "Betala om det sitter", d: "79–199 kr för hela dokumentet. Pro 249 kr/mån om du skriver ofta." },
-];
+  { n: "01", t: "step1_t", d: "step1_d" },
+  { n: "02", t: "step2_t", d: "step2_d" },
+  { n: "03", t: "step3_t", d: "step3_d" },
+] as const;
+
+const FAQ_KEYS = [
+  ["faq1_q", "faq1_a"],
+  ["faq2_q", "faq2_a"],
+  ["faq3_q", "faq3_a"],
+  ["faq4_q", "faq4_a"],
+] as const;
 
 const FAQ = [
   {
@@ -112,7 +119,11 @@ function Home() {
           {t(lang, "hero")}
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-          {t(lang, "hero_sub")} {sek(79)}–{sek(199)}. {lang === "en" ? "No account." : lang === "ar" ? "بدون حساب." : "Inget konto."}
+          {t(lang, "hero_sub")}{" "}
+          <span dir="ltr" className="inline-block tabular-nums">
+            {sek(79)}–{sek(199)}
+          </span>
+          . {t(lang, "no_account")}
         </p>
         <p className="mt-3 text-sm text-subtle">{t(lang, "hero_meta")}</p>
         <p className="mt-2 text-xs text-subtle">{t(lang, "lang_note")}</p>
@@ -120,7 +131,7 @@ function Home() {
           <Button asChild size="lg">
             <Link to="/dokument">
               {t(lang, "cta_doc")}
-              <ArrowRight className="size-4" />
+              <ArrowRight className="size-4 rtl:-scale-x-100" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
@@ -129,10 +140,10 @@ function Home() {
         </div>
         {stats.full > 0 ? (
           <p className="mt-6 text-sm tabular-nums text-subtle">
-            {stats.full} dokument färdigställda den här veckan.
+            {stats.full} {t(lang, "stats_week")}
           </p>
         ) : (
-          <p className="mt-6 text-sm text-subtle">Utkast gratis. Du betalar bara för hela texten.</p>
+          <p className="mt-6 text-sm text-subtle">{t(lang, "draft_pay")}</p>
         )}
       </section>
 
@@ -141,8 +152,8 @@ function Home() {
           {STEPS.map((s) => (
             <div key={s.n}>
               <p className="font-display text-sm text-moss">{s.n}</p>
-              <h2 className="mt-2 font-display text-2xl tracking-tight">{s.t}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
+              <h2 className="mt-2 font-display text-2xl tracking-tight">{t(lang, s.t)}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{t(lang, s.d)}</p>
             </div>
           ))}
         </div>
@@ -150,9 +161,9 @@ function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Dokument folk släpar på</h2>
+          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{t(lang, "docs_h")}</h2>
           <Link to="/dokument" className="hidden text-sm font-medium text-pine sm:inline">
-            Alla dokument
+            {t(lang, "all_docs")}
           </Link>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -161,22 +172,24 @@ function Home() {
           ))}
         </div>
         <Button asChild variant="outline" className="mt-6 sm:hidden">
-          <Link to="/dokument">Alla dokument</Link>
+          <Link to="/dokument">{t(lang, "all_docs")}</Link>
         </Button>
       </section>
 
       <section className="border-y border-line bg-ink text-paper">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-14">
           <div>
-            <p className="text-xs font-medium tracking-[0.18em] text-paper/60 uppercase">Jobbpaket</p>
-            <h2 className="mt-2 font-display text-3xl tracking-tight">Brev, CV och LinkedIn. Ett köp.</h2>
+            <p className="text-xs font-medium tracking-[0.18em] text-paper/60 uppercase">{t(lang, "job_kicker")}</p>
+            <h2 className="mt-2 font-display text-3xl tracking-tight">{t(lang, "job_h")}</h2>
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-paper/75">
-              Tre dokument som hör ihop, {sek(199)} i stället för {sek(257)}. Olåsta i 30 dagar i
-              den här webbläsaren.
+              {t(lang, "job_p")}{" "}
+              <span dir="ltr" className="inline-block tabular-nums">
+                {sek(199)}
+              </span>
             </p>
           </div>
           <Button asChild size="lg" variant="outline" className="border-paper/20 bg-paper text-ink hover:bg-bg-elevated">
-            <Link to="/priser">Köp jobbpaketet</Link>
+            <Link to="/priser">{t(lang, "job_cta")}</Link>
           </Button>
         </div>
       </section>
@@ -184,22 +197,17 @@ function Home() {
       <section className="border-y border-line bg-paper">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center">
           <div>
-            <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Inte en mall. En färdig text.</h2>
+            <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{t(lang, "not_mall")}</h2>
             <ul className="mt-6 space-y-3">
-              {[
-                "Svenska som en människa faktiskt skulle skicka",
-                "Platshållare där fakta saknas – inga påhittade personnummer",
-                "Kopiera, ladda ner eller skriv ut",
-                "Skriv om: kortare eller formellare, ett klick",
-              ].map((item) => (
-                <li key={item} className="flex gap-3 text-sm leading-relaxed text-muted">
+              {(["bullet1", "bullet2", "bullet3", "bullet4"] as const).map((key) => (
+                <li key={key} className="flex gap-3 text-sm leading-relaxed text-muted">
                   <Check className="mt-0.5 size-4 shrink-0 text-pine" />
-                  {item}
+                  {t(lang, key)}
                 </li>
               ))}
             </ul>
           </div>
-          <blockquote className="rounded-xl border border-line bg-bg p-6 sm:p-8">
+          <blockquote className="rounded-xl border border-line bg-bg p-6 sm:p-8" dir="ltr" lang="sv">
             <p className="font-serif text-lg leading-relaxed text-ink">
               Stockholm den [datum]
               <br />
@@ -208,13 +216,13 @@ function Home() {
               tagit 40–60 samtal om dagen på ett elbolag – de flesta från folk som redan är arga
               när de ringer.
             </p>
-            <p className="mt-4 text-sm text-subtle">Utdrag, personligt brev</p>
+            <p className="mt-4 text-sm text-subtle">{t(lang, "excerpt_label")}</p>
           </blockquote>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <h2 className="font-display text-3xl tracking-tight">Guider, korta</h2>
+        <h2 className="font-display text-3xl tracking-tight">{t(lang, "guides_h")}</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {GUIDES.slice(0, 3).map((g) => (
             <Link
@@ -233,14 +241,14 @@ function Home() {
 
       <section className="border-t border-line bg-bg-elevated">
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-          <h2 className="font-display text-3xl tracking-tight">Frågor</h2>
+          <h2 className="font-display text-3xl tracking-tight">{t(lang, "faq_h")}</h2>
           <div className="mt-8 divide-y divide-line">
-            {FAQ.map((item) => (
-              <details key={item.q} className="group py-4">
+            {FAQ_KEYS.map(([q, a]) => (
+              <details key={q} className="group py-4">
                 <summary className="cursor-pointer list-none font-medium text-ink [&::-webkit-details-marker]:hidden">
-                  {item.q}
+                  {t(lang, q)}
                 </summary>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{item.a}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{t(lang, a)}</p>
               </details>
             ))}
           </div>
