@@ -3,15 +3,11 @@ import { SITE_NAME, SITE_URL } from "./site";
 const IMAGE = `${SITE_URL}/og-skrivklart.jpg`;
 const TERMS = `${SITE_URL}/villkor`;
 
-/** Digital vara: ingen fysisk frakt, leverans direkt, 24 h om texten är oanvändbar. */
+/** Digital text levereras direkt. Ingen retur — utkastet är gratis att prova. */
 export const merchantReturnPolicy = {
   "@type": "MerchantReturnPolicy",
   applicableCountry: "SE",
-  returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-  merchantReturnDays: 1,
-  returnMethod: "https://schema.org/ReturnByMail",
-  returnFees: "https://schema.org/FreeReturn",
-  refundType: "https://schema.org/FullRefund",
+  returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
   merchantReturnLink: TERMS,
 };
 

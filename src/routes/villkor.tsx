@@ -22,8 +22,12 @@ function VillkorPage() {
             webbläsare. Pro ger obegränsad upplåsning i 30 dagar från köp i den här webbläsaren.
           </p>
           <p>
-            Ångerrätt: digitala tjänster som levereras direkt kan omfattas av undantag. Hör av dig
-            via support inom 24 timmar om texten är uppenbart oanvändbar – då återbetalar vi.
+            Utkastet är gratis. Där ser du om texten duger innan du betalar. När du betalar
+            levereras hela dokumentet direkt i webbläsaren. Då upphör ångerrätten för digitalt
+            innehåll. Ingen återbetalning för att du «inte blev nöjd» efter att du fått texten.
+          </p>
+          <p>
+            Gick pengarna men texten kom inte fram: skriv till support. Då tittar vi på det.
           </p>
           <p>Vi kan stänga av missbruk, automatiserade anrop och uppenbara försök att kringgå betalning.</p>
           <p>Svensk lag. Tvist i svensk allmän domstol.</p>

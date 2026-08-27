@@ -40,7 +40,7 @@ const FAQ = [
   },
   {
     q: "Tänk om texten är dålig?",
-    a: "Skriv om den med ett klick – kortare eller formellare. Inte nöjd: säg till i supporten inom 24 timmar.",
+    a: "Läs utkastet först — det är gratis. Skriv om den kortare eller formellare efter köp. Ingen återbetalning när hela texten är upplåst.",
   },
   {
     q: "Behöver jag konto?",

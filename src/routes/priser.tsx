@@ -84,7 +84,7 @@ function PriserPage() {
                 "Utkast gratis",
                 "Hela texten när du betalar",
                 "Kopiera, ladda ner, skriv ut",
-                "En omskrivning ingår",
+                "Ingen återbetalning efter upplåsning",
               ].map((t) => (
                 <li key={t} className="flex gap-2">
                   <Check className="size-4 shrink-0 text-pine" />

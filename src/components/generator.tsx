@@ -246,7 +246,7 @@ export function Generator({ product }: { product: DocProduct }) {
                   <p className="font-medium">Resten är låst</p>
                   <p className="mt-1 text-sm text-muted">
                     Lås upp hela {product.name.toLowerCase()} för {sek(product.priceKr)}. Klar att
-                    kopiera, ladda ner och skriva ut. Betalning via Stripe.
+                    kopiera och skriva ut. Utkastet är provet. Ingen återbetalning efter upplåsning.
                   </p>
                 </div>
               </div>
