@@ -1,22 +1,25 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { LangPicker } from "./lang-picker";
 import { Button } from "./ui/button";
+import { t, useI18n } from "@/lib/i18n";
 
 const NAV = [
-  { to: "/brev", label: "Brev" },
-  { to: "/dokument", label: "Dokument" },
-  { to: "/priser", label: "Priser" },
-  { to: "/guider", label: "Guider" },
-  { to: "/support", label: "Support" },
+  { to: "/brev", key: "nav_brev" },
+  { to: "/dokument", key: "nav_docs" },
+  { to: "/priser", key: "nav_prices" },
+  { to: "/guider", key: "nav_guides" },
+  { to: "/support", key: "nav_support" },
 ] as const;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const lang = useI18n((s) => s.lang);
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/80 bg-bg/90 backdrop-blur-sm">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 sm:h-16 sm:px-6">
         <Link to="/" className="font-display text-xl italic tracking-tight text-ink">
           Skrivklart
         </Link>
@@ -28,22 +31,26 @@ export function SiteHeader() {
               to={item.to}
               className="text-sm font-medium text-muted transition-opacity duration-150 hover:text-ink"
             >
-              {item.label}
+              {t(lang, item.key)}
             </Link>
           ))}
+          <LangPicker />
           <Button asChild size="sm">
-            <Link to="/dokument">Skriv dokument</Link>
+            <Link to="/dokument">{t(lang, "nav_write")}</Link>
           </Button>
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex size-11 items-center justify-center rounded-lg text-ink md:hidden"
-          aria-label={open ? "Stäng meny" : "Öppna meny"}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LangPicker />
+          <button
+            type="button"
+            className="inline-flex size-11 items-center justify-center rounded-lg text-ink"
+            aria-label={open ? "Close" : "Menu"}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </div>
 
       {open ? (
@@ -56,12 +63,12 @@ export function SiteHeader() {
                 className="flex h-11 items-center text-base font-medium text-ink"
                 onClick={() => setOpen(false)}
               >
-                {item.label}
+                {t(lang, item.key)}
               </Link>
             ))}
             <Button asChild className="mt-2 w-full">
               <Link to="/dokument" onClick={() => setOpen(false)}>
-                Skriv dokument
+                {t(lang, "nav_write")}
               </Link>
             </Button>
           </nav>

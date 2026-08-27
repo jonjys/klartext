@@ -1,4 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
+import type { Lang } from "./i18n";
+import { langName } from "./i18n";
 
 export type BrevRiskLevel = "LOW" | "IMPORTANT" | "CRITICAL";
 
@@ -123,9 +125,10 @@ function parseJson(text: string): unknown {
   }
 }
 
-async function chatJson(letter: string): Promise<BrevAnalysis | null> {
+async function chatJson(letter: string, lang: Lang): Promise<BrevAnalysis | null> {
   const apiKey = process.env.XAI_API_KEY;
   if (!apiKey) return null;
+  const spoken = langName(lang);
   const res = await fetch("https://api.x.ai/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -140,7 +143,9 @@ async function chatJson(letter: string): Promise<BrevAnalysis | null> {
         {
           role: "system",
           content:
-            "Du är Skrivklart. Du översätter svenska myndighetsbrev till rak svenska. Svara BARA med JSON, inget annat. Inte juridisk rådgivning. Hitta inte på diarienummer eller lagrum. Nycklar: senderName (string|null), documentType (string|null), summary (string, max 2 meningar), plainLanguage (string, 4–8 meningar), actionPlan (array av {step}), consequences (string), deadlines (array av {description, dueDate YYYY-MM-DD eller null}), amounts (string[]), referenceNumbers (string[]), breakdown ({legal, financial, deadline} 0–100).",
+            "Du är Skrivklart. Du översätter svenska myndighetsbrev till begriplig text. Svara BARA med JSON, inget annat. Inte juridisk rådgivning. Hitta inte på diarienummer eller lagrum. Nycklar: senderName (string|null), documentType (string|null), summary (string, max 2 meningar), plainLanguage (string, 4–8 meningar), actionPlan (array av {step}), consequences (string), deadlines (array av {description, dueDate YYYY-MM-DD eller null}), amounts (string[]), referenceNumbers (string[]), breakdown ({legal, financial, deadline} 0–100). VIKTIGT: summary, plainLanguage, actionPlan.step, consequences och deadlines.description ska vara på " +
+            spoken +
+            ".",
         },
         { role: "user", content: letter.slice(0, 12000) },
       ],
@@ -181,12 +186,13 @@ async function chatJson(letter: string): Promise<BrevAnalysis | null> {
 }
 
 export const analyzeBrev = createServerFn({ method: "POST" })
-  .validator((input: { text: string }) => input)
+  .validator((input: { text: string; lang?: Lang }) => input)
   .handler(async ({ data }) => {
     const text = data.text.trim();
+    const lang: Lang = data.lang === "en" || data.lang === "ar" ? data.lang : "sv";
     if (text.length < 40) return { ok: false as const, error: "Klistra in mer av brevet – minst några meningar." };
     if (text.length > 20000) return { ok: false as const, error: "För långt. Klistra in brödtexten, inte hela PDF:en som bas64." };
-    const ai = await chatJson(text);
+    const ai = await chatJson(text, lang);
     const full = ai ?? heuristicBrev(text);
     const preview: BrevAnalysis = {
       ...full,

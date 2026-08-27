@@ -7,6 +7,7 @@ import { getStats } from "@/lib/ai";
 import { PRODUCTS } from "@/lib/catalog";
 import { GUIDES } from "@/lib/guides";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { t, useI18n } from "@/lib/i18n";
 import { sek } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
@@ -101,29 +102,30 @@ function Home() {
   const featured = featuredSlugs
     .map((slug) => PRODUCTS.find((p) => p.slug === slug))
     .filter((p): p is (typeof PRODUCTS)[number] => Boolean(p));
+  const lang = useI18n((s) => s.lang);
 
   return (
     <SiteFrame>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="mx-auto max-w-6xl px-4 pt-12 pb-16 sm:px-6 sm:pt-20 sm:pb-24">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">Svenska dokument, färdiga</p>
+        <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">{t(lang, "kicker")}</p>
         <h1 className="mt-4 max-w-3xl font-display text-[2.35rem] leading-[1.08] tracking-tight text-ink sm:text-6xl">
-          Samboavtal efter bråket.
+          {t(lang, "hero")}
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-          Personligt brev. Överklagande. Samboavtal. Du fyller i fakta – Skrivklart skriver
-          texten. {sek(79)}–{sek(199)}. Inget konto.
+          {t(lang, "hero_sub")} {sek(79)}–{sek(199)}. {lang === "en" ? "No account." : lang === "ar" ? "بدون حساب." : "Inget konto."}
         </p>
-        <p className="mt-3 text-sm text-subtle">Stripe · Utkast gratis · Klart på ungefär en minut</p>
+        <p className="mt-3 text-sm text-subtle">{t(lang, "hero_meta")}</p>
+        <p className="mt-2 text-xs text-subtle">{t(lang, "lang_note")}</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg">
             <Link to="/dokument">
-              Skriv mitt dokument
+              {t(lang, "cta_doc")}
               <ArrowRight className="size-4" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link to="/brev">Förklara ett myndighetsbrev</Link>
+            <Link to="/brev">{t(lang, "cta_brev")}</Link>
           </Button>
         </div>
         {stats.full > 0 ? (

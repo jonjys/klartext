@@ -11,6 +11,7 @@ import { createOrder } from "@/lib/orders";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import { STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
 import { useKlartext } from "@/lib/store";
+import { t, useI18n } from "@/lib/i18n";
 import { isLocalHost, sek } from "@/lib/utils";
 
 const SLUG = "myndighetsbrev";
@@ -30,14 +31,15 @@ export const Route = createFileRoute("/brev")({
   }),
 });
 
-function levelLabel(level: BrevAnalysis["riskLevel"]) {
-  if (level === "CRITICAL") return "Hög — agera snart";
-  if (level === "IMPORTANT") return "Viktigt";
-  return "Låg";
+function levelLabel(level: BrevAnalysis["riskLevel"], lang: "sv" | "en" | "ar") {
+  if (level === "CRITICAL") return t(lang, "risk_high");
+  if (level === "IMPORTANT") return t(lang, "risk_mid");
+  return t(lang, "risk_low");
 }
 
 function BrevPage() {
   const product = getProduct(SLUG)!;
+  const lang = useI18n((s) => s.lang);
   const unlocked = useKlartext((s) => s.isUnlocked(SLUG));
   const unlock = useKlartext((s) => s.unlock);
   const [text, setText] = useState("");
@@ -65,7 +67,7 @@ function BrevPage() {
   async function analyze() {
     setError(null);
     setBusy(true);
-    const res = await analyzeBrev({ data: { text } });
+    const res = await analyzeBrev({ data: { text, lang } });
     setBusy(false);
     if (!res.ok) {
       setError(res.error);
@@ -99,19 +101,20 @@ function BrevPage() {
   return (
     <SiteFrame>
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">Brevklar, inbyggt</p>
-        <h1 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">Vad betyder det här brevet?</h1>
+        <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">{t(lang, "brev_kicker")}</p>
+        <h1 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">{t(lang, "brev_h1")}</h1>
         <p className="mt-4 max-w-xl text-lg text-muted">
-          FK, Skatteverket, Kronofogden, CSN. Klistra in texten. Du får det på vanlig svenska, med datum och nästa steg. {sek(product.priceKr)}. Inte juridisk rådgivning.
+          {t(lang, "brev_lead")} {sek(product.priceKr)}.
         </p>
+        <p className="mt-2 text-xs text-subtle">{t(lang, "lang_note")}</p>
 
         <label className="mt-10 block text-sm font-medium text-ink" htmlFor="brev-text">
-          Brevet
+          {t(lang, "brev_label")}
         </label>
         <Textarea
           id="brev-text"
           className="mt-2 min-h-48"
-          placeholder="Klistra in från mejl, eller skriv av det du ser. Personnummer kan du stryka."
+          placeholder={t(lang, "brev_ph")}
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
@@ -119,33 +122,33 @@ function BrevPage() {
         <div className="mt-4 flex flex-wrap gap-3">
           <Button onClick={() => void analyze()} disabled={busy || text.trim().length < 12}>
             {busy ? <Loader2 className="size-4 animate-spin" /> : null}
-            Förklara brevet
+            {t(lang, "brev_go")}
           </Button>
-          <p className="self-center text-sm text-subtle">Utkastet är gratis. Vi sparar inte brevet.</p>
+          <p className="self-center text-sm text-subtle">{t(lang, "brev_free")}</p>
         </div>
 
         {shown ? (
           <div className="mt-12 space-y-6">
             <div className="rounded-xl border border-line bg-paper p-6">
               <p className="text-sm text-muted">
-                {shown.senderName ?? "Okänd avsändare"}
+                {shown.senderName ?? t(lang, "unknown_sender")}
                 {shown.documentType ? ` · ${shown.documentType}` : ""}
               </p>
               <p className="mt-3 text-lg leading-relaxed text-ink">{shown.summary}</p>
               <p className="mt-4 text-sm text-pine">
-                Risk {shown.riskScore}/100 — {levelLabel(shown.riskLevel)}
+                {shown.riskScore}/100 — {levelLabel(shown.riskLevel, lang)}
               </p>
             </div>
 
             {unlocked && full ? (
               <>
                 <section>
-                  <h2 className="font-display text-2xl tracking-tight">På vanlig svenska</h2>
+                  <h2 className="font-display text-2xl tracking-tight">{t(lang, "brev_plain")}</h2>
                   <p className="mt-3 whitespace-pre-wrap leading-relaxed text-ink">{full.plainLanguage}</p>
                 </section>
                 {full.deadlines.length ? (
                   <section>
-                    <h2 className="font-display text-2xl tracking-tight">Datum</h2>
+                    <h2 className="font-display text-2xl tracking-tight">{t(lang, "brev_dates")}</h2>
                     <ul className="mt-3 space-y-1 text-sm text-ink">
                       {full.deadlines.map((d) => (
                         <li key={d.description + (d.dueDate ?? "")}>
@@ -158,7 +161,7 @@ function BrevPage() {
                 ) : null}
                 {full.actionPlan.length ? (
                   <section>
-                    <h2 className="font-display text-2xl tracking-tight">Gör så här</h2>
+                    <h2 className="font-display text-2xl tracking-tight">{t(lang, "brev_do")}</h2>
                     <ol className="mt-3 list-decimal space-y-2 pl-5 text-ink">
                       {full.actionPlan.map((s) => (
                         <li key={s.step}>{s.step}</li>
@@ -172,12 +175,12 @@ function BrevPage() {
                 <div className="flex flex-wrap gap-3">
                   <Button asChild>
                     <Link to="/dokument/$slug" params={{ slug: "overklagande" }}>
-                      Skriv överklagande
+                      {t(lang, "brev_appeal")}
                     </Link>
                   </Button>
                   <Button asChild variant="outline">
                     <Link to="/dokument/$slug" params={{ slug: "reklamation" }}>
-                      Skriv reklamation
+                      {t(lang, "brev_reklamation")}
                     </Link>
                   </Button>
                 </div>
@@ -186,14 +189,14 @@ function BrevPage() {
               <div className="rounded-xl border border-line bg-bg-elevated p-6">
                 <p className="flex items-center gap-2 font-display text-xl">
                   <Lock className="size-4" />
-                  Hela tolkningen
+                  {t(lang, "brev_lock")}
                 </p>
                 <p className="mt-2 text-sm text-muted">
-                  Vanlig svenska, alla datum, handlingsplan. {sek(product.priceKr)}. Pro låser upp allt.
+                  {t(lang, "brev_lock_sub")} {sek(product.priceKr)}.
                 </p>
                 <Button className="mt-4" onClick={() => void pay()} disabled={paying}>
                   {paying ? <Loader2 className="size-4 animate-spin" /> : null}
-                  Lås upp för {sek(product.priceKr)}
+                  {t(lang, "brev_unlock")} {sek(product.priceKr)}
                 </Button>
               </div>
             )}
