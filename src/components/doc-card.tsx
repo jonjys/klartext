@@ -4,10 +4,11 @@ import type { DocProduct } from "@/lib/catalog";
 import { sek } from "@/lib/utils";
 
 export function DocCard({ product }: { product: DocProduct }) {
+  const isBrev = product.slug === "myndighetsbrev";
   return (
     <Link
-      to="/dokument/$slug"
-      params={{ slug: product.slug }}
+      to={isBrev ? "/brev" : "/dokument/$slug"}
+      params={isBrev ? undefined : { slug: product.slug }}
       className="group flex flex-col rounded-xl border border-line bg-paper p-5 shadow-[var(--shadow-soft)] transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5"
     >
       <div className="flex items-start justify-between gap-3">

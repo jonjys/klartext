@@ -18,6 +18,7 @@ export const STRIPE_PRICES: Record<string, string> = {
   anstallningsavtal: "price_1U8iOxBEo0YzuylwAiBYGe7A",
   fullmakt: "price_1U8iOzBEo0Yzuylw8WjmFBBb",
   jobbpaket: "price_1U8iP1BEo0YzuylwnzGvRI7M",
+  myndighetsbrev: "price_1U8wLPBEo0YzuylwFP8EsYnj",
 };
 
 /** Live Payment Links. */
@@ -40,6 +41,7 @@ export const STRIPE_PAYMENT_LINKS: Record<string, string> = {
   anstallningsavtal: "https://buy.stripe.com/5kQeVc3XP0cu9yE66V8og0h",
   fullmakt: "https://buy.stripe.com/28E6oG3XPcZg8uA3YN8og0i",
   jobbpaket: "https://buy.stripe.com/7sY6oGamd8J0dOU8f38og0j",
+  myndighetsbrev: "https://buy.stripe.com/6oU4gyfGx9N41289j78og0k",
 };
 
 export const PRO_SLUG = "pro";

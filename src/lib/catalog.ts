@@ -335,6 +335,28 @@ export const PRODUCTS: DocProduct[] = [
       "Skriv ett formellt överklagande. Struktur: rubrik, diarienummer-platshållare, bakgrund, grunder, bevisning, yrkande, underskrift. Sakligt. Inga utropstecken. Hänvisa till 'beslutet den [datum]'. Svenska myndighetssvenska, inte advokatjargong.",
   },
   {
+    slug: "myndighetsbrev",
+    name: "Myndighetsbrev",
+    short: "Vad FK, Skatteverket eller Kronofogden egentligen säger.",
+    pitch:
+      "Klistra in brevet. Du får det på vanlig svenska, med datum och vad du ska göra. Sen kan du skriva svaret.",
+    priceKr: 79,
+    category: "myndighet",
+    outcome: "En tolkning du kan agera på, plus länk till överklagande.",
+    fields: [
+      {
+        id: "brevet",
+        label: "Brevet",
+        type: "textarea",
+        placeholder: "Klistra in texten. Stryk personnummer.",
+        required: true,
+      },
+      TONE,
+    ],
+    extraPrompt:
+      "Skriv en rak svensk sammanfattning av myndighetsbrevet: avsändare, vad de kräver, datum, vad mottagaren bör göra. Inte juridisk rådgivning. Platshållare i [hakparentes] om fakta saknas.",
+  },
+  {
     slug: "reklamation",
     name: "Reklamation",
     short: "Kräv pengarna eller bytet – utan att låta knäpp.",

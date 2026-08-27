@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 
 const NAV = [
+  { to: "/brev", label: "Brev" },
   { to: "/dokument", label: "Dokument" },
   { to: "/priser", label: "Priser" },
   { to: "/guider", label: "Guider" },

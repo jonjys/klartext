@@ -113,7 +113,7 @@ function Home() {
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link to="/priser">Se priser</Link>
+            <Link to="/brev">Förklara ett myndighetsbrev</Link>
           </Button>
         </div>
         {stats.full > 0 ? (
@@ -139,7 +139,7 @@ function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Sexton dokument som folk släpar på</h2>
+          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Dokument folk släpar på</h2>
           <Link to="/dokument" className="hidden text-sm font-medium text-pine sm:inline">
             Alla dokument
           </Link>

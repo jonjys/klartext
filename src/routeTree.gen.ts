@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BrevRouteImport } from './routes/brev'
 import { Route as IntegritetRouteImport } from './routes/integritet'
 import { Route as OmRouteImport } from './routes/om'
 import { Route as PriserRouteImport } from './routes/priser'
@@ -25,6 +26,11 @@ import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe.webhoo
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrevRoute = BrevRouteImport.update({
+  id: '/brev',
+  path: '/brev',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntegritetRoute = IntegritetRouteImport.update({
@@ -85,6 +91,7 @@ const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/brev': typeof BrevRoute
   '/integritet': typeof IntegritetRoute
   '/om': typeof OmRoute
   '/priser': typeof PriserRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/brev': typeof BrevRoute
   '/integritet': typeof IntegritetRoute
   '/om': typeof OmRoute
   '/priser': typeof PriserRoute
@@ -114,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/brev': typeof BrevRoute
   '/integritet': typeof IntegritetRoute
   '/om': typeof OmRoute
   '/priser': typeof PriserRoute
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/brev'
     | '/integritet'
     | '/om'
     | '/priser'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/brev'
     | '/integritet'
     | '/om'
     | '/priser'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/brev'
     | '/integritet'
     | '/om'
     | '/priser'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BrevRoute: typeof BrevRoute
   IntegritetRoute: typeof IntegritetRoute
   OmRoute: typeof OmRoute
   PriserRoute: typeof PriserRoute
@@ -193,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brev': {
+      id: '/brev'
+      path: '/brev'
+      fullPath: '/brev'
+      preLoaderRoute: typeof BrevRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/integritet': {
@@ -277,6 +297,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BrevRoute: BrevRoute,
   IntegritetRoute: IntegritetRoute,
   OmRoute: OmRoute,
   PriserRoute: PriserRoute,

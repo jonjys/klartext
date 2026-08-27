@@ -18,7 +18,9 @@ async function stripeCheckoutUrl(opts: {
       ? `${opts.origin}/priser`
       : opts.slug === JOB_PACK_SLUG
         ? `${opts.origin}/priser`
-        : `${opts.origin}/dokument/${opts.slug}`;
+        : opts.slug === "myndighetsbrev"
+          ? `${opts.origin}/brev`
+          : `${opts.origin}/dokument/${opts.slug}`;
   const body = new URLSearchParams();
   body.set("mode", opts.slug === "pro" ? "subscription" : "payment");
   body.set("success_url", success);
