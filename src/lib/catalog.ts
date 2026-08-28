@@ -730,6 +730,91 @@ export const PRODUCTS: DocProduct[] = [
     extraPrompt:
       "Skriv en svensk fullmakt. Parter, uppdragets gränser, giltighetstid, återkallelse, underskrift och vittnen. Platshållare i [hakparentes]. Kort.",
   },
+  {
+    slug: "offert",
+    name: "Offert",
+    short: "Ett anbud kunden kan säga ja till. Inte ett kalkylark.",
+    pitch:
+      "Hantverkare och konsult: jobb, pris, vad som ingår. En sida att skicka. Inte ett helt offert-system.",
+    priceKr: 89,
+    category: "avtal",
+    outcome: "Offert / anbud redo att skicka.",
+    fields: [
+      {
+        id: "avsandare",
+        label: "Du / firman",
+        type: "textarea",
+        placeholder: "Namn, firma, org.nr om du har, telefon.",
+        required: true,
+      },
+      {
+        id: "kund",
+        label: "Kund",
+        type: "text",
+        placeholder: "Namn eller bolag",
+        required: true,
+      },
+      {
+        id: "jobb",
+        label: "Vad som ska göras",
+        type: "textarea",
+        placeholder: "Omfattning, material, tid. Vad som inte ingår.",
+        required: true,
+      },
+      {
+        id: "pris",
+        label: "Pris",
+        type: "textarea",
+        placeholder: "Fast pris eller löpande, moms, giltighet.",
+        required: true,
+      },
+      TONE,
+    ],
+    extraPrompt:
+      "Skriv en svensk offert/anbud. Rubrik OFFERT, parter, omfattning, pris exkl/inkl moms som platshållare, giltighet, hur man accepterar. Inte en faktura. Inte juridisk rådgivning. Begriplig svenska.",
+  },
+  {
+    slug: "betalningspaminelse",
+    name: "Betalningspåminnelse",
+    short: "Första påminnelsen. Saklig, med belopp och datum.",
+    pitch: "Kunden har inte betalat. Ett brev, inte Kronofogden ännu.",
+    priceKr: 79,
+    category: "avtal",
+    outcome: "Påminnelse redo att skicka.",
+    fields: [
+      {
+        id: "avsandare",
+        label: "Du / firman",
+        type: "textarea",
+        placeholder: "Namn, firma, kontakt.",
+        required: true,
+      },
+      {
+        id: "mottagare",
+        label: "Mottagare",
+        type: "text",
+        placeholder: "Kundens namn",
+        required: true,
+      },
+      {
+        id: "faktura",
+        label: "Faktura och belopp",
+        type: "textarea",
+        placeholder: "Fakturanr, belopp, förfallodatum, vad det gällde.",
+        required: true,
+      },
+      {
+        id: "nydatum",
+        label: "Nytt sista datum",
+        type: "text",
+        placeholder: "T.ex. inom 8 dagar",
+        required: true,
+      },
+      TONE,
+    ],
+    extraPrompt:
+      "Skriv en svensk betalningspåminnelse. Saklig, inte hotfull. Belopp, fakturanummer, nytt datum, betaluppgifter som [platshållare]. Inte inkasso, inte Kronofogden. Kort.",
+  },
 ];
 
 export const PRO_PRICE_KR = 249;

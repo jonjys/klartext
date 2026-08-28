@@ -55,6 +55,10 @@ function write(slug: string, a: Record<string, string>): string {
       return anstallning(a);
     case "fullmakt":
       return fullmakt(a);
+    case "offert":
+      return offert(a);
+    case "betalningspaminelse":
+      return paminelse(a);
     default:
       return "Kunde inte skriva det dokumentet just nu.";
   }
@@ -455,4 +459,48 @@ ______________________
 Fullmaktsgivare
 
 Vittne: ________________        Vittne: ________________`;
+}
+
+function offert(a: Record<string, string>) {
+  return `OFFERT
+
+Från: ${val(a, "avsandare", "[firma]")}
+Till: ${val(a, "kund", "[kund]")}
+Datum: [datum]
+Giltig: [antal dagar]
+
+1. Omfattning
+${val(a, "jobb", "[vad som ska göras, material, vad som inte ingår]")}
+
+2. Pris
+${val(a, "pris", "[pris, moms, betalning]")}
+
+3. Accept
+Svara skriftligen (mejl räcker) så gäller offerten. Ändringar av omfattning ger nytt pris.
+
+Ort och datum: [ort], [datum]
+
+______________________
+${val(a, "avsandare", "[firma]")}`;
+}
+
+function paminelse(a: Record<string, string>) {
+  return `[Ort] den [datum]
+
+Betalningspåminnelse
+
+${val(a, "mottagare", "[kund]")}
+
+Vi har inte registrerat betalning för:
+
+${val(a, "faktura", "[fakturanr, belopp, förfallodatum, vad det gällde]")}
+
+Var vänlig betala ${val(a, "nydatum", "inom 8 dagar")}.
+
+Betaluppgifter: [bankgiro/swish/kontonr]
+
+Om beloppet redan är betalt: bortse från brevet.
+
+Med vänlig hälsning
+${val(a, "avsandare", "[firma]")}`;
 }
