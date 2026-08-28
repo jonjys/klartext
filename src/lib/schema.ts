@@ -28,13 +28,13 @@ export const shippingDetails = {
       "@type": "QuantitativeValue",
       minValue: 0,
       maxValue: 0,
-      unitCode: "HUR",
+      unitCode: "DAY",
     },
     transitTime: {
       "@type": "QuantitativeValue",
       minValue: 0,
       maxValue: 0,
-      unitCode: "HUR",
+      unitCode: "DAY",
     },
   },
 };
@@ -45,6 +45,7 @@ export function productOffer(priceKr: number, url: string) {
     priceCurrency: "SEK",
     price: String(priceKr),
     priceValidUntil: "2027-08-27",
+    validFrom: "2026-08-26",
     availability: "https://schema.org/InStock",
     itemCondition: "https://schema.org/NewCondition",
     url,
