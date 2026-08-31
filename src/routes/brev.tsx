@@ -9,6 +9,7 @@ import { analyzeBrev, type BrevAnalysis } from "@/lib/brev";
 import { getProduct } from "@/lib/catalog";
 import { createOrder } from "@/lib/orders";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
+import { productJsonLd } from "@/lib/schema";
 import { STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
 import { useKlartext } from "@/lib/store";
 import { t, useI18n } from "@/lib/i18n";
@@ -100,6 +101,20 @@ function BrevPage() {
 
   return (
     <SiteFrame>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            productJsonLd({
+              name: product.name,
+              description: product.pitch,
+              slug: product.slug,
+              priceKr: product.priceKr,
+              url: `${SITE_URL}/brev`,
+            }),
+          ),
+        }}
+      />
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <p className="text-xs font-medium tracking-[0.18em] text-muted uppercase">{t(lang, "brev_kicker")}</p>
         <h1 className="mt-3 font-display text-4xl tracking-tight sm:text-5xl">{t(lang, "brev_h1")}</h1>

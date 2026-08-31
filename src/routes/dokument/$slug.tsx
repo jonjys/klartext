@@ -4,7 +4,7 @@ import { SiteFrame } from "@/components/site-frame";
 import { getProduct } from "@/lib/catalog";
 import { recordEvent } from "@/lib/ai";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
-import { productOffer, siteImage } from "@/lib/schema";
+import { productJsonLd, siteImage } from "@/lib/schema";
 import { sek } from "@/lib/utils";
 import { useEffect } from "react";
 
@@ -24,6 +24,10 @@ export const Route = createFileRoute("/dokument/$slug")({
           name: "description",
           content: `${product.pitch} ${sek(product.priceKr)}. Utkast gratis. Inte juridisk rådgivning.`,
         },
+        { property: "og:title", content: `${product.name} | ${SITE_NAME}` },
+        { property: "og:image", content: siteImage },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
       ],
       links: [{ rel: "canonical", href: `${SITE_URL}/dokument/${product.slug}` }],
     };
@@ -53,16 +57,14 @@ function DokumentPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            name: product.name,
-            description: product.pitch,
-            image: siteImage,
-            brand: { "@type": "Brand", name: SITE_NAME },
-            url: `${SITE_URL}/dokument/${product.slug}`,
-            offers: productOffer(product.priceKr, `${SITE_URL}/dokument/${product.slug}`),
-          }),
+          __html: JSON.stringify(
+            productJsonLd({
+              name: product.name,
+              description: product.pitch,
+              slug: product.slug,
+              priceKr: product.priceKr,
+            }),
+          ),
         }}
       />
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">

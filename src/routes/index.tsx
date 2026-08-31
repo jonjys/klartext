@@ -7,7 +7,7 @@ import { getStats } from "@/lib/ai";
 import { PRODUCTS } from "@/lib/catalog";
 import { GUIDES } from "@/lib/guides";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
-import { merchantReturnPolicy, productOffer, siteImage } from "@/lib/schema";
+import { merchantReturnPolicy, productImages, productOffer } from "@/lib/schema";
 import { t, useI18n } from "@/lib/i18n";
 import { sek } from "@/lib/utils";
 
@@ -70,7 +70,7 @@ const jsonLd = {
       name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/profil.jpg`,
-      image: siteImage,
+      image: productImages,
       areaServed: "SE",
       hasMerchantReturnPolicy: merchantReturnPolicy,
     },
@@ -78,7 +78,7 @@ const jsonLd = {
       "@type": "SoftwareApplication",
       name: SITE_NAME,
       url: SITE_URL,
-      image: siteImage,
+      image: productImages,
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       offers: productOffer(79, SITE_URL),
