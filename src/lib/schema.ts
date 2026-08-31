@@ -1,6 +1,6 @@
 import { SITE_NAME, SITE_URL } from "./site";
 
-const IMAGE = `${SITE_URL}/og-sv.jpg`;
+const IMAGE = `${SITE_URL}/og.png`;
 const IMAGE_SQUARE = `${SITE_URL}/profil.jpg`;
 const TERMS = `${SITE_URL}/villkor`;
 
