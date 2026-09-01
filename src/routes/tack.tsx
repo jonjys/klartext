@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { getProduct } from "@/lib/catalog";
 import { markPaid } from "@/lib/orders";
 import { JOB_PACK_SLUG, JOB_PACK_UNLOCKS } from "@/lib/stripe-map";
-import { useKlartext } from "@/lib/store";
+import { useSkrivklart } from "@/lib/store";
 
 export const Route = createFileRoute("/tack")({
   component: TackPage,
@@ -23,19 +23,19 @@ export const Route = createFileRoute("/tack")({
 
 function TackPage() {
   const search = Route.useSearch();
-  const unlock = useKlartext((s) => s.unlock);
-  const unlockPro = useKlartext((s) => s.unlockPro);
-  const unlockJobPack = useKlartext((s) => s.unlockJobPack);
+  const unlock = useSkrivklart((s) => s.unlock);
+  const unlockPro = useSkrivklart((s) => s.unlockPro);
+  const unlockJobPack = useSkrivklart((s) => s.unlockJobPack);
   const [slug, setSlug] = useState<string | null>(search.slug ?? null);
 
   useEffect(() => {
     let pendingSlug = search.slug ?? null;
     let token = search.token ?? null;
-    const raw = sessionStorage.getItem("klartext:pending");
+    const raw = sessionStorage.getItem("skrivklart:pending");
     if (raw) {
       try {
         const pending = JSON.parse(raw) as { token?: string; slug?: string };
-        sessionStorage.removeItem("klartext:pending");
+        sessionStorage.removeItem("skrivklart:pending");
         token = token ?? pending.token ?? null;
         pendingSlug = pendingSlug ?? pending.slug ?? null;
       } catch {

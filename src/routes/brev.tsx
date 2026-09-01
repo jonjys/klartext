@@ -11,7 +11,7 @@ import { createOrder } from "@/lib/orders";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/site";
 import { productJsonLd } from "@/lib/schema";
 import { STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
-import { useKlartext } from "@/lib/store";
+import { useSkrivklart } from "@/lib/store";
 import { t, useI18n } from "@/lib/i18n";
 import { isLocalHost, sek } from "@/lib/utils";
 
@@ -41,8 +41,8 @@ function levelLabel(level: BrevAnalysis["riskLevel"], lang: "sv" | "en" | "ar") 
 function BrevPage() {
   const product = getProduct(SLUG)!;
   const lang = useI18n((s) => s.lang);
-  const unlocked = useKlartext((s) => s.isUnlocked(SLUG));
-  const unlock = useKlartext((s) => s.unlock);
+  const unlocked = useSkrivklart((s) => s.isUnlocked(SLUG));
+  const unlock = useSkrivklart((s) => s.unlock);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [paying, setPaying] = useState(false);
@@ -84,7 +84,7 @@ function BrevPage() {
     const order = await createOrder({ data: { slug: SLUG, origin: window.location.origin } });
     const link = STRIPE_PAYMENT_LINKS[SLUG];
     if (link && !isLocalHost() && order.ok) {
-      sessionStorage.setItem("klartext:pending", JSON.stringify({ token: order.token, slug: SLUG }));
+      sessionStorage.setItem("skrivklart:pending", JSON.stringify({ token: order.token, slug: SLUG }));
       if (order.checkoutUrl) {
         window.location.href = order.checkoutUrl;
         return;

@@ -32,7 +32,7 @@ const empty = (slug: string): Draft => ({
   unlocked: false,
 });
 
-export const useKlartext = create<State>()(
+export const useSkrivklart = create<State>()(
   persist(
     (set, get) => ({
       drafts: {},
@@ -91,6 +91,6 @@ export const useKlartext = create<State>()(
         return Boolean(until && until > Date.now());
       },
     }),
-    { name: "klartext-v1" },
+    { name: "skrivklart-v1" },
   ),
 );

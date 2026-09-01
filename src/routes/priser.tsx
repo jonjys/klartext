@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { PRODUCTS, PRO_PRICE_KR } from "@/lib/catalog";
 import { createOrder, markPaid } from "@/lib/orders";
 import { JOB_PACK_SLUG, STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
-import { useKlartext } from "@/lib/store";
+import { useSkrivklart } from "@/lib/store";
 import { isLocalHost, sek } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -24,9 +24,9 @@ export const Route = createFileRoute("/priser")({
 });
 
 function PriserPage() {
-  const unlockPro = useKlartext((s) => s.unlockPro);
-  const unlockJobPack = useKlartext((s) => s.unlockJobPack);
-  const hasPro = useKlartext((s) => s.hasPro());
+  const unlockPro = useSkrivklart((s) => s.unlockPro);
+  const unlockJobPack = useSkrivklart((s) => s.unlockJobPack);
+  const hasPro = useSkrivklart((s) => s.hasPro());
   const [busy, setBusy] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
@@ -37,7 +37,7 @@ function PriserPage() {
     });
     const link = STRIPE_PAYMENT_LINKS[slug];
     if (link && !isLocalHost() && order.ok) {
-      sessionStorage.setItem("klartext:pending", JSON.stringify({ token: order.token, slug }));
+      sessionStorage.setItem("skrivklart:pending", JSON.stringify({ token: order.token, slug }));
       if (order.checkoutUrl) {
         window.location.href = order.checkoutUrl;
         return;

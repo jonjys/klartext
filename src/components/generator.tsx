@@ -5,7 +5,7 @@ import { generateDocument, recordEvent, rewriteDocument } from "@/lib/ai";
 import type { DocProduct } from "@/lib/catalog";
 import { createOrder, markPaid } from "@/lib/orders";
 import { STRIPE_PAYMENT_LINKS } from "@/lib/stripe-map";
-import { useKlartext } from "@/lib/store";
+import { useSkrivklart } from "@/lib/store";
 import { isLocalHost, sek } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -13,13 +13,13 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 
 export function Generator({ product }: { product: DocProduct }) {
-  const draft = useKlartext((s) => s.drafts[product.slug]);
-  const setAnswers = useKlartext((s) => s.setAnswers);
-  const setPreview = useKlartext((s) => s.setPreview);
-  const setFull = useKlartext((s) => s.setFull);
-  const unlock = useKlartext((s) => s.unlock);
-  const unlocked = useKlartext((s) => s.isUnlocked(product.slug));
-  const hasPro = useKlartext((s) => s.hasPro());
+  const draft = useSkrivklart((s) => s.drafts[product.slug]);
+  const setAnswers = useSkrivklart((s) => s.setAnswers);
+  const setPreview = useSkrivklart((s) => s.setPreview);
+  const setFull = useSkrivklart((s) => s.setFull);
+  const unlock = useSkrivklart((s) => s.unlock);
+  const unlocked = useSkrivklart((s) => s.isUnlocked(product.slug));
+  const hasPro = useSkrivklart((s) => s.hasPro());
 
   const answers = draft?.answers ?? {};
   const preview = draft?.preview ?? "";
@@ -84,7 +84,7 @@ export function Generator({ product }: { product: DocProduct }) {
     const link = STRIPE_PAYMENT_LINKS[product.slug];
     if (link && !isLocalHost() && order.ok) {
       sessionStorage.setItem(
-        "klartext:pending",
+        "skrivklart:pending",
         JSON.stringify({ token: order.token, slug: product.slug }),
       );
       if (order.checkoutUrl) {

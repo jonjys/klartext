@@ -1,31 +1,28 @@
-# Klartext
+# Skrivklart
 
-Samboavtal, överklagande till FK, hyresansökan och fler svenska dokument. 79–199 kr styck, Jobbpaket 199 kr, Pro 249 kr/mån.
+Svenska dokument, färdiga. Du fyller i fakta — Skrivklart skriver texten.
 
-Utkastet är gratis. Hela texten efter betalning via Stripe.
+**Live: [skrivklart.se](https://www.skrivklart.se)**
 
-**Detta är inte juridisk rådgivning.**
+Samboavtal, överklagande till FK, hyresansökan, myndighetsbrev, offert med mera. 79–199 kr. Utkastet är gratis. Inget konto.
 
-Live: https://www.skrivklart.se
-
-Repo: https://github.com/jonjys/klartext
+Detta är **inte** juridisk rådgivning.
 
 ## Produkten
 
-- 16 dokumenttyper
-- Jobbpaket (brev + CV + LinkedIn)
-- AI-skrivare med mall-fallback
-- Rådgivaren (support-agent)
-- SEO-guider
-- Stripe Checkout + Payment Links (SEK)
-- Webhook `/api/stripe/webhook`
+- 20 dokumenttyper (avtal, bostad, jobb, myndighet)
+- Myndighetsbrev: klistra in FK/Skatteverket/Kronofogden, få det på vanlig svenska
+- Jobbpaket: personligt brev + CV + LinkedIn, 199 kr
+- Pro 249 kr/mån
+- 13 korta guider
+- Stripe Checkout (SEK)
+- Svenska / English / العربية i menyn — dokumentet skrivs på svenska
 
 ## Stack
 
-TanStack Start, React 19, Tailwind v4, xAI Grok, Stripe, Vercel.
+TanStack Start, React 19, Tailwind v4, xAI, Stripe, Vercel.
 
-## Pengar
+## Länkar
 
-Varje dokument 79–199 SEK. Marginal efter AI-anrop är hög. Pro 249 SEK/mån. Jobbpaket 199 SEK höjer snittordern.
-
-Live Stripe-produkter ligger på kontot AI Commerce OS.
+- Sajten: https://www.skrivklart.se
+- Repo: https://github.com/jonjys/skrivklart
